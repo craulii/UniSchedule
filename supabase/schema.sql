@@ -47,9 +47,8 @@ CREATE TABLE schedules (
   day         SMALLINT NOT NULL CHECK (day BETWEEN 1 AND 5),
   block_key   TEXT NOT NULL,
   room        TEXT,
-  created_at  TIMESTAMPTZ DEFAULT now(),
-
-  UNIQUE(user_id, day, block_key)
+  created_at  TIMESTAMPTZ DEFAULT now()
+  -- Sin UNIQUE: se permiten topes (múltiples ramos en el mismo bloque)
 );
 
 CREATE INDEX idx_schedules_user_id ON schedules(user_id);

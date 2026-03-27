@@ -12,8 +12,8 @@ export default function ScheduleGrid() {
 
   const [modal, setModal] = useState({ open: false, day: null, blockKey: null })
 
-  const getEntry = (day, blockKey) => {
-    return entries.find(e => e.day === day && e.block_key === blockKey)
+  const getEntries = (day, blockKey) => {
+    return entries.filter(e => e.day === day && e.block_key === blockKey)
   }
 
   const handleRemove = async (id) => {
@@ -51,7 +51,7 @@ export default function ScheduleGrid() {
                   {DAYS.map(day => (
                     <ScheduleCell
                       key={`${day.key}-${block.key}`}
-                      entry={getEntry(day.key, block.key)}
+                      entries={getEntries(day.key, block.key)}
                       onAssign={() => setModal({ open: true, day: day.key, blockKey: block.key })}
                       onRemove={handleRemove}
                     />

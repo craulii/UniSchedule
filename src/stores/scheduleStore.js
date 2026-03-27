@@ -21,8 +21,8 @@ const useScheduleStore = create((set, get) => ({
     }
   },
 
-  getEntry: (day, blockKey) => {
-    return get().entries.find(e => e.day === day && e.block_key === blockKey)
+  getEntries: (day, blockKey) => {
+    return get().entries.filter(e => e.day === day && e.block_key === blockKey)
   },
 
   assign: async ({ subject_id, day, block_key, room }) => {
