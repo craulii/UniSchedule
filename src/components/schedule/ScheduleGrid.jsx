@@ -3,21 +3,18 @@ import { SCHEDULE_BLOCKS, DAYS } from '../../constants/blocks'
 import useScheduleStore from '../../stores/scheduleStore'
 import ScheduleCell from './ScheduleCell'
 import LunchRow from './LunchRow'
-import ScheduleAssignModal from './ScheduleAssignModal'
+import ScheduleBlockDetailModal from './ScheduleBlockDetailModal'
 
 export default function ScheduleGrid() {
   const entries = useScheduleStore(s => s.entries)
   const assign = useScheduleStore(s => s.assign)
+  const update = useScheduleStore(s => s.update)
   const unassign = useScheduleStore(s => s.unassign)
 
   const [modal, setModal] = useState({ open: false, day: null, blockKey: null })
 
   const getEntries = (day, blockKey) => {
     return entries.filter(e => e.day === day && e.block_key === blockKey)
-  }
-
-  const handleRemove = async (id) => {
-    await unassign(id)
   }
 
   return (
@@ -52,8 +49,7 @@ export default function ScheduleGrid() {
                     <ScheduleCell
                       key={`${day.key}-${block.key}`}
                       entries={getEntries(day.key, block.key)}
-                      onAssign={() => setModal({ open: true, day: day.key, blockKey: block.key })}
-                      onRemove={handleRemove}
+                      onClick={() => setModal({ open: true, day: day.key, blockKey: block.key })}
                     />
                   ))}
                 </tr>
@@ -63,12 +59,14 @@ export default function ScheduleGrid() {
         </table>
       </div>
 
-      <ScheduleAssignModal
+      <ScheduleBlockDetailModal
         open={modal.open}
         onClose={() => setModal({ open: false, day: null, blockKey: null })}
         day={modal.day}
         blockKey={modal.blockKey}
-        onSubmit={assign}
+        onAssign={assign}
+        onUpdate={update}
+        onRemove={unassign}
       />
     </>
   )

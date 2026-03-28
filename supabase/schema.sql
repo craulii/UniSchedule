@@ -117,7 +117,7 @@ CREATE TABLE evaluations (
   subject_id    UUID NOT NULL REFERENCES subjects(id) ON DELETE CASCADE,
   category_id   UUID REFERENCES evaluation_categories(id) ON DELETE SET NULL,
   name          TEXT NOT NULL,
-  type          TEXT NOT NULL CHECK (type IN ('certamen', 'control', 'tarea', 'proyecto', 'otro')),
+  type          TEXT NOT NULL CHECK (type IN ('certamen', 'control', 'tarea', 'proyecto', 'entrega', 'laboratorio', 'otro')),
   eval_date     DATE,
   eval_time     TIME,
   room          TEXT,

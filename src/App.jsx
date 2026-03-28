@@ -9,6 +9,8 @@ import DashboardPage from './pages/DashboardPage'
 import SubjectsPage from './pages/SubjectsPage'
 import SubjectDetailPage from './pages/SubjectDetailPage'
 import SchedulePage from './pages/SchedulePage'
+import EvaluationsPage from './pages/EvaluationsPage'
+import GradesPage from './pages/GradesPage'
 import NotFoundPage from './pages/NotFoundPage'
 
 export default function App() {
@@ -29,6 +31,8 @@ export default function App() {
             <Route path="/subjects" element={<SubjectsPage />} />
             <Route path="/subjects/:id" element={<SubjectDetailPage />} />
             <Route path="/schedule" element={<SchedulePage />} />
+            <Route path="/evaluations" element={<EvaluationsPage />} />
+            <Route path="/grades" element={<GradesPage />} />
           </Route>
         </Route>
         <Route path="*" element={<NotFoundPage />} />

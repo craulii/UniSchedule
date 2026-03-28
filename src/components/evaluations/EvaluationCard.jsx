@@ -11,6 +11,8 @@ export default function EvaluationCard({ evaluation, onEdit, onDelete, onToggleP
     control: 'blue',
     tarea: 'green',
     proyecto: 'orange',
+    entrega: 'cyan',
+    laboratorio: 'red',
     otro: 'gray',
   }
 

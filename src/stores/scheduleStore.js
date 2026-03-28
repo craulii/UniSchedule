@@ -53,6 +53,34 @@ const useScheduleStore = create((set, get) => ({
     return data
   },
 
+  update: async (id, changes) => {
+    const prev = get().entries.find(e => e.id === id)
+    set(s => ({
+      entries: s.entries.map(e => e.id === id ? { ...e, ...changes } : e),
+    }))
+
+    const { data, error } = await supabase
+      .from('schedules')
+      .update(changes)
+      .eq('id', id)
+      .select('*, subject:subjects(id, name, code)')
+      .single()
+
+    if (error) {
+      set(s => ({
+        entries: s.entries.map(e => e.id === id ? prev : e),
+        error: error.message,
+      }))
+      return null
+    }
+
+    set(s => ({
+      entries: s.entries.map(e => e.id === id ? data : e),
+      error: null,
+    }))
+    return data
+  },
+
   unassign: async (id) => {
     const prev = get().entries.find(e => e.id === id)
     set(s => ({ entries: s.entries.filter(e => e.id !== id) }))

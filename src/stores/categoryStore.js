@@ -7,6 +7,20 @@ const useCategoryStore = create((set, get) => ({
   loading: false,
   error: null,
 
+  fetchAll: async () => {
+    set({ loading: true, error: null })
+    const { data, error } = await supabase
+      .from('evaluation_categories')
+      .select('*')
+      .order('sort_order')
+
+    if (error) {
+      set({ loading: false, error: error.message })
+    } else {
+      set({ categories: data || [], loading: false })
+    }
+  },
+
   fetchBySubject: async (subjectId) => {
     set({ loading: true, error: null })
     const { data, error } = await supabase
