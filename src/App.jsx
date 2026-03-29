@@ -11,6 +11,7 @@ import SubjectDetailPage from './pages/SubjectDetailPage'
 import SchedulePage from './pages/SchedulePage'
 import EvaluationsPage from './pages/EvaluationsPage'
 import GradesPage from './pages/GradesPage'
+import CalendarPage from './pages/CalendarPage'
 import NotFoundPage from './pages/NotFoundPage'
 
 export default function App() {
@@ -33,6 +34,7 @@ export default function App() {
             <Route path="/schedule" element={<SchedulePage />} />
             <Route path="/evaluations" element={<EvaluationsPage />} />
             <Route path="/grades" element={<GradesPage />} />
+            <Route path="/calendar" element={<CalendarPage />} />
           </Route>
         </Route>
         <Route path="*" element={<NotFoundPage />} />
